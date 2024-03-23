@@ -13,7 +13,14 @@ export default function Paint({ paint, index }) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <h4>{paint.colour}</h4>
+          <div className="card shadow-sm">
+            <div className="card-body ">
+              <h5 className="card-title">{paint.colour}</h5>
+              <p className="card-text">
+                Current Stock: {paint.currentStock}/{paint.total}
+              </p>
+            </div>
+          </div>
         </div>
       )}
     </Draggable>

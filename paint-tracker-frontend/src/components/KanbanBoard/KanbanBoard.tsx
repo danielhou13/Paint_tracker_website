@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import KanbanColumns from "./KanbanColumns";
+import KanbanColumns from "../KanbanColumns/KanbanColumns";
 
 //reference for DragDropContext
 //https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/drag-drop-context.md
 export default function KanbanBoard() {
   //setup the three states for the kanban board
   const [available, setAvailable] = useState([
-    { colour: "white", id: "0" },
-    { colour: "black", id: "1" },
-    { colour: "gray", id: "2" },
-    { colour: "blue", id: "3" },
-    { colour: "purple", id: "4" },
+    { colour: "white", id: "0", currentStock: 5, total: 5 },
+    { colour: "black", id: "1", currentStock: 5, total: 5 },
+    { colour: "gray", id: "2", currentStock: 5, total: 5 },
+    { colour: "blue", id: "3", currentStock: 5, total: 5 },
+    { colour: "purple", id: "4", currentStock: 5, total: 5 },
   ]);
   const [runningLow, setRunningLow] = useState([]);
   const [outOfStock, setOutOfStock] = useState([]);
@@ -113,23 +113,17 @@ export default function KanbanBoard() {
 
   //adding in styling here for now
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <h2 style={{ textAlign: "center" }}>Paint Availability</h2>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexDirection: "row",
-          width: "1300px",
-        }}
-      >
-        <KanbanColumns title={"Available"} paints={available} id={"1"} />
+    <div className="main-content">
+      <DragDropContext onDragEnd={onDragEnd}>
+        <h2 style={{ textAlign: "center" }}>Paint Availability</h2>
+        <div className="row py-2">
+          <KanbanColumns title={"Available"} paints={available} id={"1"} />
 
-        <KanbanColumns title={"Running Low"} paints={runningLow} id={"2"} />
+          <KanbanColumns title={"Running Low"} paints={runningLow} id={"2"} />
 
-        <KanbanColumns title={"Out of Stock"} paints={outOfStock} id={"3"} />
-      </div>
-    </DragDropContext>
+          <KanbanColumns title={"Out of Stock"} paints={outOfStock} id={"3"} />
+        </div>
+      </DragDropContext>
+    </div>
   );
 }
