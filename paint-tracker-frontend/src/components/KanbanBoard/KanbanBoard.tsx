@@ -1,21 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import KanbanColumns from "../KanbanColumns/KanbanColumns";
 import { paint } from "../paint";
+import axios from "axios";
 
 //reference for DragDropContext
 //https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/drag-drop-context.md
 export default function KanbanBoard() {
   //setup the three states for the kanban board
-  const [available, setAvailable] = useState([
-    { colour: "white", id: "0", currentStock: 5 },
-    { colour: "black", id: "1", currentStock: 5 },
-    { colour: "gray", id: "2", currentStock: 5 },
-    { colour: "blue", id: "3", currentStock: 5 },
-    { colour: "purple", id: "4", currentStock: 5 },
-  ]);
+  const [available, setAvailable] = useState([]);
   const [runningLow, setRunningLow] = useState<Array<paint>>([]);
   const [outOfStock, setOutOfStock] = useState<Array<paint>>([]);
+
+  //API call to retrieve list of paints from the backend and add to available paints
+  //TODO: change API call address to not localhost
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/retrieve-paints")
+      .then((response) => {
+        console.log(response.data.paint_json);
+        let paintArray = [];
+
+        response.data.paint_json.forEach((element) => {
+          const PaintObject = { id: element.pk, ...element.fields };
+          console.log(PaintObject);
+          paintArray.push(PaintObject);
+        });
+
+        setAvailable(paintArray);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const onDragEnd = (result: {
     source: { droppableId: string; index: number };
     destination?: { droppableId: string; index: number };
