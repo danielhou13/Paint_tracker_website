@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { paint } from "../paint";
 
-// Reference for Draggable
+type PaintCardProps = {
+  paint: paint;
+  index: number;
+  updatePaint: (paint: paint, newStock: number) => void;
+};
+
+//Reference for Draggable
 //https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md
-export default function Paint({ paint, index }) {
+export default function Paint({ paint, index, updatePaint }: PaintCardProps) {
   // use draggable from react-beautiful-dnd
+  const [isEditing, setisEditing] = useState(false);
+  const [stock, setStock] = useState(paint.currentStock);
+
+  //stop editing when we click out
+  const handleBlur = () => {
+    setisEditing(false);
+  };
+
+  //when we update the stock number, if the number is greater than 0, pass the paint and the new stock
+  //to the higher level functions.
+  const handleChange = (event) => {
+    if (event.target.value >= 0) {
+      updatePaint(paint, event.target.value);
+    }
+  };
+
   return (
     <Draggable draggableId={`${paint.id}`} key={paint.id} index={index}>
-      {(provided, snapshot) => (
+      {(provided) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
@@ -16,9 +39,19 @@ export default function Paint({ paint, index }) {
           <div className="card shadow-sm">
             <div className="card-body ">
               <h5 className="card-title">{paint.colour}</h5>
-              <p className="card-text">
-                Current Stock: {paint.currentStock}/{paint.total}
-              </p>
+              {isEditing ? (
+                <input
+                  type="number"
+                  value={paint.currentStock}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              ) : (
+                <p className="card-text">Current Stock: {paint.currentStock}</p>
+              )}
+              <button onClick={() => setisEditing(!isEditing)}>
+                Edit Stock
+              </button>
             </div>
           </div>
         </div>
