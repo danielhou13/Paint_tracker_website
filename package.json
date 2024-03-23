@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "ant": "^0.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "styled-components": "^6.1.8"
+  }
+}
