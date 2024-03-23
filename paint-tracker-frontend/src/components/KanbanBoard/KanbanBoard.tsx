@@ -18,12 +18,10 @@ export default function KanbanBoard() {
     axios
       .get("http://localhost:8000/api/retrieve-paints")
       .then((response) => {
-        console.log(response.data.paint_json);
         let paintArray = [];
 
         response.data.paint_json.forEach((element) => {
           const PaintObject = { id: element.pk, ...element.fields };
-          console.log(PaintObject);
           paintArray.push(PaintObject);
         });
 
@@ -168,9 +166,19 @@ export default function KanbanBoard() {
         );
         break;
     }
+
+    // send the id and the newstock amount and pass it into the backend for update
+    axios
+      .post("http://localhost:8000/api/update-paints", {
+        id: paint.id,
+        newStock: newStock,
+      })
+      .then((response) => {})
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  //adding in styling here for now
   return (
     <div className="main-content">
       <DragDropContext onDragEnd={onDragEnd}>

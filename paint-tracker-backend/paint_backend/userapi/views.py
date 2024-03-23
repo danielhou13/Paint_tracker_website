@@ -26,3 +26,16 @@ def retrieve_paints(request):
     data = {"paint_json": struct}
 
     return JsonResponse(data)
+
+
+# Using id passed from frontend, update the stock of the respective paint
+@api_view(["POST"])
+def update_paints(request):
+    print(request.data)
+    if request.data:
+
+        updated_paint = request.data
+        paint = Paint.objects.get(id=updated_paint["id"])
+        paint.currentStock = updated_paint["newStock"]
+        paint.save()
+    return Response({"message": True})
