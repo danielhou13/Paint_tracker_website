@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import KanbanColumns from "./KanbanColumns";
 
+//reference for DragDropContext
+//https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/drag-drop-context.md
 export default function KanbanBoard() {
   //setup the three states for the kanban board
   const [available, setAvailable] = useState([

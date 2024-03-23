@@ -1,6 +1,8 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 
+// Reference for Draggable
+//https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md
 export default function Paint({ paint, index }) {
   // use draggable from react-beautiful-dnd
   return (
