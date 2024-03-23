@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import KanbanColumns from "../KanbanColumns/KanbanColumns";
 import { paint } from "../paint";
+import axios from "axios";
 
 //reference for DragDropContext
 //https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/drag-drop-context.md
@@ -16,6 +17,7 @@ export default function KanbanBoard() {
   ]);
   const [runningLow, setRunningLow] = useState<Array<paint>>([]);
   const [outOfStock, setOutOfStock] = useState<Array<paint>>([]);
+  const [message, setMessage] = useState("");
   const onDragEnd = (result: {
     source: { droppableId: string; index: number };
     destination?: { droppableId: string; index: number };
@@ -152,10 +154,22 @@ export default function KanbanBoard() {
     }
   };
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/hello-world/")
+      .then((response) => {
+        setMessage(response.data.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   //adding in styling here for now
   return (
     <div className="main-content">
       <DragDropContext onDragEnd={onDragEnd}>
+        <h2>{message}</h2>
         <h2 style={{ textAlign: "center" }}>Paint Availability</h2>
         <div className="row py-2">
           <KanbanColumns
