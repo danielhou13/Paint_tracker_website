@@ -13,7 +13,6 @@ export default function Paint({paint, index}) {
             >
                 <h4>{paint.colour}</h4>
             </div>
-
         )}
     </Draggable>
   )
