@@ -57,6 +57,7 @@ ROOT_URLCONF = "paint_backend.urls"
 CSRF_COOKIE_SECURE = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
