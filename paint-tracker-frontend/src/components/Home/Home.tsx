@@ -4,7 +4,7 @@ import KanbanBoard from "../KanbanBoard/KanbanBoard";
 export default function Home({ permissions, loginFunction, user }) {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
           <span className="navbar-brand">Paint Availability Kanban Board</span>
           <ul className="navbar-nav">
@@ -21,6 +21,11 @@ export default function Home({ permissions, loginFunction, user }) {
         permissions={permissions}
         loginFunction={loginFunction}
       ></KanbanBoard>
+      <footer className="fixed-bottom mt-auto py-2 bg-light">
+        All users except for John can edit the stock of paints. The system admin
+        Adam can update the permissions and assigned groups of each user to
+        allow for different permissions.
+      </footer>
     </div>
   );
 }

@@ -31,7 +31,7 @@ export default function KanbanColumns({
 
   return (
     <div className="col-4">
-      <div className="title">{title}</div>
+      <h1 className="title">{title}</h1>
       <div className="card bg-light">
         <Droppable droppableId={id}>
           {(provided) => (

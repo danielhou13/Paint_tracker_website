@@ -204,7 +204,7 @@ export default function KanbanBoard({ permissions, loginFunction }) {
   };
 
   return (
-    <div className="main-content">
+    <div className="main-content py-5">
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="row py-2">
           <KanbanColumns

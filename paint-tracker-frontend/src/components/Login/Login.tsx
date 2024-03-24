@@ -32,41 +32,54 @@ export default function Login({ setLoggedIn, setPermissions, user }) {
       });
   };
   return (
-    <div className="mainContainer">
-      <div className="titleContainer">
-        <div>Login</div>
-      </div>
+    <div className="container-xl">
+      <h1>Login</h1>
       <br />
-      <div className="inputContainer">
-        <input
-          value={username}
-          placeholder="Enter name/'painter'"
-          onChange={(ev) => setusername(ev.target.value)}
-          className={"inputBox"}
-        />
-      </div>
-      <br />
-      <div className="inputContainer">
-        <input
-          value={password}
-          placeholder="Enter your password here"
-          onChange={(ev) => setPassword(ev.target.value)}
-          className={"inputBox"}
-        />
-      </div>
-      <br />
-      <div className="inputContainer">
-        <input
-          className={"inputButton"}
-          type="button"
-          onClick={onButtonClick}
-          value={"Log in"}
-        />
-      </div>
+      <form>
+        <div className="form-group mt-3">
+          <label>Email address</label>
+          <input
+            value={username}
+            placeholder="Enter name/'painter'"
+            onChange={(ev) => setusername(ev.target.value)}
+            className="form-control"
+          />
+          <small className="form-text text-muted">
+            Currently the only users are: Adam, John, Jane, painter. Please
+            enter of of those values into the username. The system admin can use
+            the Django admin tab to log in and add more users (password as
+            below).
+          </small>
+        </div>
+        <div className="form-group mt-5">
+          <label>Password</label>
+          <input
+            value={password}
+            placeholder="Enter your password here"
+            onChange={(ev) => setPassword(ev.target.value)}
+            className="form-control"
+          />
+          <small className="form-text text-muted">
+            All users have the same password shown in the placeholder. The
+            system admin (Adam) can log into the django admin page to change
+            emails and permissions.
+          </small>
+        </div>
+        <br />
+        <div className="form-group mt-3">
+          <input
+            className={"inputButton"}
+            type="button"
+            onClick={onButtonClick}
+            value={"Log in"}
+          />
+        </div>
+      </form>
+
       {errorLogin && (
         <div className="alert alert-danger my-3">
           Could not log in message. (Need to implement username/password
-          distrinction)
+          distinction)
         </div>
       )}
     </div>

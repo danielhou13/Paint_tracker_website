@@ -49,6 +49,7 @@ def login_function(request):
     username: str = request.data["username"]
     password: str = request.data["password"]
     user = authenticate(request, username=username, password=password)
+    print(username, password)
     if user is not None:
         login(request, user)
         permissions = serializers.serialize(
@@ -56,7 +57,6 @@ def login_function(request):
         )
         struct = json.loads(permissions)
         data = {"permissions_json": struct}
-        print(data)
         return Response({"Logged_in": True, "Permissions": data, "name": username})
 
 
