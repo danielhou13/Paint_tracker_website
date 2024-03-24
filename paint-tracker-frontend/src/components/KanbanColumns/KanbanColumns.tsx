@@ -7,6 +7,7 @@ type KanbanColumns = {
   title: string;
   paints: Array<paint>;
   id: string;
+  permissions: Array<string>;
   updatePaint: (paint: paint, newStock: number, droppableId: string) => void;
 };
 
@@ -16,6 +17,7 @@ export default function KanbanColumns({
   title,
   paints,
   id,
+  permissions,
   updatePaint,
 }: KanbanColumns) {
   // use droppable from react-beautiful-dnd
@@ -39,6 +41,7 @@ export default function KanbanColumns({
                   key={index}
                   paint={paint}
                   index={index}
+                  permissions={Permissions}
                   updatePaint={updatePaint2}
                 />
               ))}

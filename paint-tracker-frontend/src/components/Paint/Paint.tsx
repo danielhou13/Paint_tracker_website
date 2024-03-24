@@ -6,12 +6,18 @@ import axios from "axios";
 type PaintCardProps = {
   paint: paint;
   index: number;
+  permissions: Array<string>;
   updatePaint: (paint: paint, newStock: number) => void;
 };
 
 //Reference for Draggable
 //https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md
-export default function Paint({ paint, index, updatePaint }: PaintCardProps) {
+export default function Paint({
+  paint,
+  index,
+  permissions,
+  updatePaint,
+}: PaintCardProps) {
   // use draggable from react-beautiful-dnd
   const [isEditing, setisEditing] = useState(false);
   const [canEdit, setcanEdit] = useState(false);
