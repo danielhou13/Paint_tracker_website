@@ -20,19 +20,6 @@ export default function Paint({
 }: PaintCardProps) {
   // use draggable from react-beautiful-dnd
   const [isEditing, setisEditing] = useState(false);
-  const [canEdit, setcanEdit] = useState(false);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/can-edit")
-      .then((response) => {
-        console.log(response.data.message);
-        setcanEdit(response.data.message);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   //stop editing when we click out
   const handleBlur = () => {
@@ -68,7 +55,7 @@ export default function Paint({
               ) : (
                 <p className="card-text">Current Stock: {paint.currentStock}</p>
               )}
-              {canEdit && (
+              {permissions.includes("Can change paint") && (
                 <button onClick={() => setisEditing(!isEditing)}>
                   Edit Stock
                 </button>

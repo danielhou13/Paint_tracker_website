@@ -57,7 +57,7 @@ def login_function(request):
         struct = json.loads(permissions)
         data = {"permissions_json": struct}
         print(data)
-        return Response({"Logged_in": True, "Permissions": data})
+        return Response({"Logged_in": True, "Permissions": data, "name": username})
 
 
 @api_view(["POST"])

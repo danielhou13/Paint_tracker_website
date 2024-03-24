@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-export default function Login({ setLoggedIn, setPermissions }) {
+export default function Login({ setLoggedIn, setPermissions, user }) {
   const [username, setusername] = useState("");
   const [password, setPassword] = useState("testtest12345");
   const [errorLogin, setErrorLogin] = useState(false);
@@ -24,6 +24,8 @@ export default function Login({ setLoggedIn, setPermissions }) {
             )
           );
         }
+        console.log(response.data);
+        user(response.data.name);
       })
       .catch((error) => {
         setErrorLogin(true);

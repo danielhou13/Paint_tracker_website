@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import KanbanBoard from "./components/KanbanBoard/KanbanBoard";
 import Login from "./components/Login/Login";
+import Home from "./components/Home/Home";
 
 function App() {
+  const [user, setUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [permissions, setPermissions] = useState([]);
 
@@ -13,8 +14,7 @@ function App() {
   };
 
   const permissionsRetrieve = (listOfPermissions) => {
-    console.log(listOfPermissions.filter((perm) => perm.includes("paint")));
-    // setPermissions(listOfPermissions);.filter((perm) => perm.contains("paint")
+    setPermissions(listOfPermissions.filter((perm) => perm.includes("paint")));
   };
   return (
     <BrowserRouter>
@@ -23,7 +23,11 @@ function App() {
           path="/"
           element={
             loggedIn ? (
-              <KanbanBoard permissions={permissions} />
+              <Home
+                permissions={permissions}
+                loginFunction={LoginFunction}
+                user={user}
+              />
             ) : (
               <Navigate to="/login" />
             )
@@ -36,6 +40,7 @@ function App() {
               <Login
                 setLoggedIn={LoginFunction}
                 setPermissions={permissionsRetrieve}
+                user={setUser}
               />
             ) : (
               <Navigate to="/" />

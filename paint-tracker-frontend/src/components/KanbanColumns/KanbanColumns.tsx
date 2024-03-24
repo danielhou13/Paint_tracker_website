@@ -41,7 +41,7 @@ export default function KanbanColumns({
                   key={index}
                   paint={paint}
                   index={index}
-                  permissions={Permissions}
+                  permissions={permissions}
                   updatePaint={updatePaint2}
                 />
               ))}

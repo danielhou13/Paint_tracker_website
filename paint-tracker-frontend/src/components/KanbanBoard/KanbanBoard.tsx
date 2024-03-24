@@ -6,7 +6,7 @@ import axios from "axios";
 
 //reference for DragDropContext
 //https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/drag-drop-context.md
-export default function KanbanBoard({ permissions }) {
+export default function KanbanBoard({ permissions, loginFunction }) {
   //setup the three states for the kanban board
   const [available, setAvailable] = useState<Array<paint>>([]);
   const [runningLow, setRunningLow] = useState<Array<paint>>([]);
@@ -206,7 +206,6 @@ export default function KanbanBoard({ permissions }) {
   return (
     <div className="main-content">
       <DragDropContext onDragEnd={onDragEnd}>
-        <h2 style={{ textAlign: "center" }}>Paint Availability</h2>
         <div className="row py-2">
           <KanbanColumns
             title={"Available"}
