@@ -9,7 +9,7 @@ export default function Login({ setLoggedIn, setPermissions, user }) {
   // Get user permissions and set logged in status
   const onButtonClick = () => {
     axios
-      .post("http://localhost:8000/api/login", {
+      .post("http://django-paint-6d3cee377c88.herokuapp.com/api/login", {
         username: username,
         password: password,
       })

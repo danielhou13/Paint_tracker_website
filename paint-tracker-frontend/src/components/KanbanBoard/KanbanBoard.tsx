@@ -16,7 +16,7 @@ export default function KanbanBoard({ permissions, loginFunction }) {
   //TODO: change API call address to not localhost
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/retrieve-paints")
+      .get("http://django-paint-6d3cee377c88.herokuapp.com/api/retrieve-paints")
       .then((response) => {
         let paintArrayavailable = [];
         let paintArrayrunningLow = [];
@@ -123,11 +123,14 @@ export default function KanbanBoard({ permissions, loginFunction }) {
         break;
     }
     axios
-      .post("http://localhost:8000/api/update-paints", {
-        id: paint.id,
-        newStock: paint.currentStock,
-        newColumn: destinationDroppableId,
-      })
+      .post(
+        "http://django-paint-6d3cee377c88.herokuapp.com/api/update-paints",
+        {
+          id: paint.id,
+          newStock: paint.currentStock,
+          newColumn: destinationDroppableId,
+        }
+      )
       .then((response) => {})
       .catch((error) => {
         console.log(error);
@@ -192,11 +195,14 @@ export default function KanbanBoard({ permissions, loginFunction }) {
 
     // send the id and the newstock amount and pass it into the backend for update
     axios
-      .post("http://localhost:8000/api/update-paints", {
-        id: paint.id,
-        newStock: newStock,
-        newColumn: droppableId,
-      })
+      .post(
+        "http://django-paint-6d3cee377c88.herokuapp.com/api/update-paints",
+        {
+          id: paint.id,
+          newStock: newStock,
+          newColumn: droppableId,
+        }
+      )
       .then((response) => {})
       .catch((error) => {
         console.log(error);

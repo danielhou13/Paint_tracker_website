@@ -1,23 +1,18 @@
 # Create your views here.
 import json
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Permission
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Paint
 from django.core import serializers
 
 
-@api_view(["GET"])
 def hello_world(request):
-    return Response({"message": "Hello, world!"})
-
-
-@api_view(["GET"])
-def can_edit(request):
-    return Response({"message": True})
+    return HttpResponse(
+        "Hello! if you want to access the admin view, please remove the 'api/' and insert '/admin' to the end of the url!"
+    )
 
 
 # convert all the paints into a json to send into the frontend
