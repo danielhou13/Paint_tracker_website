@@ -9,7 +9,7 @@ export default function Login({ setLoggedIn, setPermissions, user }) {
   // Get user permissions and set logged in status
   const onButtonClick = () => {
     axios
-      .post("http://django-paint-6d3cee377c88.herokuapp.com/api/login", {
+      .post("https://django-paint-6d3cee377c88.herokuapp.com/api/login", {
         username: username,
         password: password,
       })
@@ -20,8 +20,8 @@ export default function Login({ setLoggedIn, setPermissions, user }) {
           // get permissions' names
           setPermissions(
             response.data.Permissions.permissions_json.map(
-              (item) => item.fields.name
-            )
+              (item) => item.fields.name,
+            ),
           );
         }
         console.log(response.data);
