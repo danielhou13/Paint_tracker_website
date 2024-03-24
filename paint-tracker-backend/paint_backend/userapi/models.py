@@ -6,6 +6,7 @@ from django.db import models
 class Paint(models.Model):
     colour = models.CharField(max_length=15)
     currentStock = models.IntegerField()
+    column = models.CharField(max_length=15)
 
     # define the paint by its colour
     def __str__(self):

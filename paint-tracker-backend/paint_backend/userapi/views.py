@@ -33,9 +33,9 @@ def retrieve_paints(request):
 def update_paints(request):
     print(request.data)
     if request.data:
-
         updated_paint = request.data
         paint = Paint.objects.get(id=updated_paint["id"])
         paint.currentStock = updated_paint["newStock"]
+        paint.column = updated_paint["newColumn"]
         paint.save()
     return Response({"message": True})

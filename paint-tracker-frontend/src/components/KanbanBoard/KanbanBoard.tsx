@@ -8,7 +8,7 @@ import axios from "axios";
 //https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/drag-drop-context.md
 export default function KanbanBoard() {
   //setup the three states for the kanban board
-  const [available, setAvailable] = useState([]);
+  const [available, setAvailable] = useState<Array<paint>>([]);
   const [runningLow, setRunningLow] = useState<Array<paint>>([]);
   const [outOfStock, setOutOfStock] = useState<Array<paint>>([]);
 
@@ -18,14 +18,27 @@ export default function KanbanBoard() {
     axios
       .get("http://localhost:8000/api/retrieve-paints")
       .then((response) => {
-        let paintArray = [];
+        let paintArrayavailable = [];
+        let paintArrayrunningLow = [];
+        let paintArrayoutOfStock = [];
 
         response.data.paint_json.forEach((element) => {
           const PaintObject = { id: element.pk, ...element.fields };
-          paintArray.push(PaintObject);
+          switch (element.fields.column) {
+            case "1": // Available
+              paintArrayavailable.push(PaintObject);
+              setAvailable(paintArrayavailable);
+              break;
+            case "2": // low on paint
+              paintArrayrunningLow.push(PaintObject);
+              setRunningLow(paintArrayrunningLow);
+              break;
+            case "3": // out of stock
+              paintArrayoutOfStock.push(PaintObject);
+              setOutOfStock(paintArrayoutOfStock);
+              break;
+          }
         });
-
-        setAvailable(paintArray);
       })
       .catch((error) => {
         console.log(error);
@@ -109,6 +122,16 @@ export default function KanbanBoard() {
         setOutOfStock([...outOfStock, newPaint]);
         break;
     }
+    axios
+      .post("http://localhost:8000/api/update-paints", {
+        id: paint.id,
+        newStock: paint.currentStock,
+        newColumn: destinationDroppableId,
+      })
+      .then((response) => {})
+      .catch((error) => {
+        console.log(error);
+      });
   }
   //easy way of removing from array
   function deleteItem(sourceDroppableId: string, paintId: string) {
@@ -172,6 +195,7 @@ export default function KanbanBoard() {
       .post("http://localhost:8000/api/update-paints", {
         id: paint.id,
         newStock: newStock,
+        newColumn: droppableId,
       })
       .then((response) => {})
       .catch((error) => {
