@@ -1,6 +1,6 @@
 ## Paint Tracker Website Django Backend
 
-This Django app was built to host APIs for the Paint Tracker Website [frontend](https://github.com/danielhou13/Paint_tracker_website). The primary use of this Django app is the API calls found in `userapi/views.py` and the Django Admin Page.
+This Django app was built to host APIs for the Paint Tracker Website [frontend](https://github.com/danielhou13/paint-tracker-frontend). The primary use of this Django app is the API calls found in `userapi/views.py` and the Django Admin Page.
 The database for this backend is an Amazon RDS database. The application is deployed using heroku and can be found at this [link](https://django-paint-6d3cee377c88.herokuapp.com/api/). 
 Since this is meant to be a backend, there is no fancy landing page and really is just used for the api calls and admin page found [here](https://django-paint-6d3cee377c88.herokuapp.com/admin/login/?next=/admin/).
 
@@ -12,6 +12,8 @@ It features `groups`, `users`, as well as a model called `paints` under `userapi
 ### Paints
 The paint item itself is simple, only having its colour, the current stock, and the column that the paint currently resides in. The column refers to the "Available", "Running low" and "Out of Stock" columns of the Kanban board.
 ![image](https://github.com/danielhou13/paint_backend/assets/54420410/a7f86c76-5daf-4c08-ad63-96151fadbf58)
+
+
 ### Groups
 Inside of the groups, there are groups with specific permissions such as painter, assigned, and system admin. Of course, the system admin has all the permissions, whereas assigner can only "view".
 
