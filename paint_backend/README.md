@@ -28,8 +28,11 @@ As there are only few Users highlighted in the document, the users have been cre
 |  Jane | Painter  |
 | painter | Painter |
 
-Jane might not be a painter, but she requires the same permissions and therefore is classified as a painter. She in theory could be "inventory manager", so the system admin "Adam" could update and change it for her.
-John only requires viewing so is assigned the group "assigned" which can only view.
+Jane doesn't always paint, but she requires the same permissions. She in theory could be "inventory manager", so the system admin "Adam" could update and change it for her.
+John only requires viewing so is assigned the group "assigned" which can only view paints.
+Adam is the system manager that can update, view, and use the Django admin.
+painter is a Painter who needs to be able to move paints and edit stock.
+
 
 
 
