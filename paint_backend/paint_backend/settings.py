@@ -79,7 +79,13 @@ WSGI_APPLICATION = "paint_backend.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# Use SQLite if you want to run on local and the database is no longer running
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": "mydatabase",
+#     }
+# }
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
