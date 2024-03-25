@@ -9,6 +9,9 @@ Currently, the Admin Page is logged in by the user `admin` or `Adam` using the p
 It features `groups`, `users`, as well as a model called `paints` under `userapi`. Currently, this is the only way to add new groups, users, and paints, and it can be done by the system admin "Adam".
 ![image](https://github.com/danielhou13/paint_backend/assets/54420410/73ccc89c-a91d-4d94-87b0-0c75341fe394)
 
+### Paints
+The paint item itself is simple, only having its colour, the current stock, and the column that the paint currently resides in. The column refers to the "Available", "Running low" and "Out of Stock" columns of the Kanban board.
+![image](https://github.com/danielhou13/paint_backend/assets/54420410/a7f86c76-5daf-4c08-ad63-96151fadbf58)
 ### Groups
 Inside of the groups, there are groups with specific permissions such as painter, assigned, and system admin. Of course, the system admin has all the permissions, whereas assigner can only "view".
 
